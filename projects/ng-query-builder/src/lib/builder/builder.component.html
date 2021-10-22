@@ -1,0 +1,129 @@
+<ng-container *ngFor="let rule of rules; let i = index;">
+    <ng-container [ngTemplateOutlet]="ruleTemplate"
+        [ngTemplateOutletContext]="{ rule: rule, next: i < rules.length ? rules[i+1] : null, index: i, length: rules.length, grandIndex: i, grandLength: rules.length, depth: 0 }">
+    </ng-container>
+</ng-container>
+
+<!-- add rule button -->
+<div class="filter-button">
+    <button nz-button (click)="addFilter('rule')" type="button">
+        {{config.text.addRule}}
+    </button>
+    <!-- [attr.disabled]="!rules || rules.length == 0" -->
+    <button nz-button (click)="addFilter('group')" type="button">
+        {{config.text.addGroup}}
+    </button>
+</div>
+
+<!-- rule template -->
+<ng-template #ruleTemplate let-rule="rule" let-next="next" let-i="index" let-length="length" let-grandIndex="grandIndex"
+    let-grandLength="grandLength" let-depth="depth">
+
+    <!-- group -->
+    <ng-container *ngIf="rule.rules && rule.rules.length > 0">
+        <div class="group">
+            <ng-container *ngFor="let rule2 of rule.rules; let i2 = index">
+                <ng-container [ngTemplateOutlet]="ruleTemplate"
+                    [ngTemplateOutletContext]="{ rule: rule2, next: i2 < rule.rules.length ? rule.rules[i2+1] : null, index: i2, length: rule.rules.length, grandIndex: grandIndex, grandLength: grandLength, depth: depth + 1 }">
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <!-- condition -->
+        <ng-container [ngTemplateOutlet]="conditionTemplate"
+            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length, depth: depth }">
+        </ng-container>
+
+    </ng-container>
+
+    <!-- rule -->
+    <ng-container *ngIf="!rule.rules || rule.rules.length == 0">
+        <!-- {{ rule.id }} -->
+        <div class="rule {{grandLength == (grandIndex+1) ? 'last' : ''}}">
+            <div class="filter-text">
+                <span class="field">
+                    {{rule.field?.name}}
+                </span>
+                <span class="operator">
+                    {{rule.operator?.symbol}}
+                </span>
+                <span class="value">
+                    {{rule.value}}
+                </span>
+            </div>
+            <div (click)="onRuleAction('edit', rule)" class="action">
+                <i nz-icon nzType="edit"></i>
+            </div>
+            <div (click)="onRuleAction('delete', rule)" class="action">
+                <i nz-icon nzType="delete"></i>
+            </div>
+            <div #popover="nzPopover" class="action" nz-popover nzPopoverTrigger="click"
+                [nzPopoverContent]="optionTemplate" nzPopoverPlacement="bottomRight"
+                nzPopoverOverlayClassName="action-popover">
+                <i nz-icon nzType="more"></i>
+                <ng-template #optionTemplate>
+                    <ul class="action-options">
+                        <li (click)="onRuleAction('edit', rule, popover)">
+                            {{config.text.edit}}
+                        </li>
+                        <li (click)="onRuleAction('add_rule', rule, popover)">
+                            {{config.text.addRule}}
+                        </li>
+                        <li (click)="onRuleAction('add_group', rule, popover)">
+                            {{config.text.addGroup}}
+                        </li>
+                        <li (click)="onRuleAction('delete', rule, popover)">
+                            {{config.text.delete}}
+                        </li>
+                    </ul>
+                </ng-template>
+            </div>
+        </div>
+
+        <!-- condition -->
+        <ng-container [ngTemplateOutlet]="conditionTemplate"
+            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length, depth: depth }">
+        </ng-container>
+
+    </ng-container>
+
+</ng-template>
+
+<!-- condition template -->
+<ng-template #conditionTemplate let-rule="rule" let-next="next" let-condition="condition" let-last="last"
+    let-depth="depth">
+    <div class="condition" *ngIf="!last">
+        <ng-container *ngIf="condition?.value == 'and'">
+            <nz-tag (click)="toggleCondition(condition)" [nzColor]="'#fdbf4c'">{{condition.value}}</nz-tag>
+        </ng-container>
+        <ng-container *ngIf="condition?.value == 'or'">
+            <nz-tag (click)="toggleCondition(condition)" [nzColor]="'#55cd97'">{{condition.value}}</nz-tag>
+        </ng-container>
+        <ng-container *ngIf="next && next.type == 'group'">
+            <div (click)="onGroupAction('delete', next)" class="action">
+                <i nz-icon nzType="delete"></i>
+            </div>
+            <div #popover="nzPopover" class="action" nz-popover nzPopoverTrigger="click"
+                [nzPopoverContent]="optionTemplate" nzPopoverPlacement="bottomRight"
+                nzPopoverOverlayClassName="action-popover" class="action">
+                <i nz-icon nzType="ellipsis"></i>
+                <ng-template #optionTemplate>
+                    <ul class="action-options">
+                        <li (click)="onGroupAction('add_rule', next, popover)">
+                            {{config.text.addRule}}
+                        </li>
+                        <li (click)="onGroupAction('add_group', next, popover)">
+                            {{config.text.addGroup}}
+                        </li>
+                        <li (click)="onGroupAction('delete', next, popover)">
+                            {{config.text.delete}}
+                        </li>
+                    </ul>
+                </ng-template>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<!-- filter modal -->
+<app-filter #filterModal></app-filter>

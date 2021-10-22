@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    padding: 100px 300px;
+    background-color: #ebedf0;
+}
+
+.ant-select {
+    width: 100% !important;
+}
+
+nz-select-top-control,
+nz-date-picker,
+input,
+button {
+    border-radius: 50px !important;
+}
+
+.action-popover .ant-popover-inner-content {
+    padding: 0;
+}
+
+.ant-modal-content {
+    border-radius: 15px;
+}
+
+.ant-modal-header {
+    border-radius: 15px 15px 0 0;
+}
+
+.ant-popover-inner {
+    border-radius: 10px;
+    li {
+        &:first-child {
+            border-radius: 10px 10px 0 0;
+        }
+        &:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+    }
+}
+
+nz-option-container {
+    border-radius: 10px !important;
+}

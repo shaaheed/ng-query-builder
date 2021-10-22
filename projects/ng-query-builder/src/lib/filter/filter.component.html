@@ -1,0 +1,29 @@
+<nz-modal nzCentered [(nzVisible)]="show" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="handleCancel()"
+    nzTitle="Add a filter" [nzBodyStyle]="bodyStyle" nzMask="false">
+    <ng-template #modalContent>
+        <div class="filter-body">
+            {{filter?.field?.type}}
+            <div class="controls">
+
+                <!-- field -->
+                <app-select [value]="filter?.field?.value" (onChange)="onFieldChange($event)" [items]="fields"
+                    placeholder="Field"></app-select>
+
+                <!-- operator -->
+                <app-select [value]="filter?.operator?.value" [disabled]="filter?.field == null"
+                    (onChange)="onOperatorChange($event)" [items]="operators" placeholder="Operator"></app-select>
+
+                <!-- date -->
+                <app-date-picker [value]="filter?.value" *ngIf="filter?.field?.type == 'date'" (onChange)="onValueChange($event)"></app-date-picker>
+
+                <!-- text -->
+                <app-input *ngIf="filter?.field?.type != 'date'" [value]="filter?.value"
+                    [disabled]="filter?.operator == null" (onChange)="onValueChange($event)"></app-input>
+            </div>
+            <div class="buttons">
+                <button (click)="handleCancel()" nz-button>Cancel</button>
+                <button (click)="submit()" nz-button nzType="primary">Apply</button>
+            </div>
+        </div>
+    </ng-template>
+</nz-modal>

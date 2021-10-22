@@ -11,6 +11,14 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "paths": {
+      "ng-query-builder": [
+        "dist/ng-query-builder/ng-query-builder",
+        "dist/ng-query-builder",
+        "dist/ng-query-builder/ng-query-builder",
+        "dist/ng-query-builder"
+      ]
+    },
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

@@ -1,6 +1,7 @@
 {
-  "name": "query-builder",
-  "version": "0.0.0",
+  "name": "ng-antd-query-builder",
+  "version": "1.0.0",
+  "description": "Query builder",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,6 +10,14 @@
     "test": "ng test"
   },
   "private": true,
+  "keywords": [
+    "query-builder",
+    "query",
+    "builder",
+    "angular",
+    "ng",
+    "antd"
+  ],
   "dependencies": {
     "@angular/animations": "~12.2.0",
     "@angular/common": "~12.2.0",
@@ -18,6 +27,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "ng-zorro-antd": "^12.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -34,6 +44,9 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^12.1.1",
     "typescript": "~4.3.5"
-  }
+  },
+  "author": "Sahidul Islam",
+  "license": "MIT"
 }

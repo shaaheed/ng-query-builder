@@ -1,0 +1,90 @@
+.filter-button {
+    display: flex;
+    align-items: center;
+    button {
+        margin-right: 8px;
+    }
+}
+
+.group {
+    border-radius: 5px;
+    margin-left: 20px;
+    padding: 5px 0 0 19px;
+    border-left: 1px solid #ccd7e6;
+}
+
+.group.last,
+.rule.last {
+    margin-bottom: 20px;
+}
+
+.rule {
+    .filter-text {
+        flex: 1;
+    }
+    height: 40px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 5px;
+    .field {
+        font-weight: 600;
+    }
+    .value {
+        color: #005ed6;
+    }
+    &:hover {
+        .action {
+            display: block;
+        }
+    }
+}
+
+.action {
+    display: none;
+    cursor: pointer;
+    i {
+        padding: 5px;
+        &:hover {
+            padding: 5px;
+            border-radius: 50px;
+            background: #f7f7f7;
+            border-radius: 50px;
+        }
+    }
+}
+
+.condition {
+    margin: 7px 0;
+    display: flex;
+    align-items: center;
+    min-height: 24px;
+    &:hover {
+        .action {
+            display: block;
+        }
+    }
+    nz-tag {
+        font-size: 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 39px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.action-options {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none;
+        padding: 5px 15px;
+        cursor: pointer;
+        &:hover {
+            background-color: #f7f7f7;
+        }
+    }
+}
