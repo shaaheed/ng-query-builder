@@ -1,3 +1,6 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { FieldType } from "./field-type";
 
 export class Field {

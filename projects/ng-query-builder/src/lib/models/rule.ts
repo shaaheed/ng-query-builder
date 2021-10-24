@@ -1,6 +1,9 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { clone, uuid } from "../utils/utils";
 import { Condition } from "./condition";
-import { Field } from "./field";
+import { Field } from "./fields/field";
 import { Operator } from "./operator";
 import { Type } from "./type";
 

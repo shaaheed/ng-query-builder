@@ -3,18 +3,15 @@
 
 import { Type } from "./type"
 
-export class Condition {
+export class Option {
+
     type: Type = Type.condition;
+    label: string;
     value: string;
 
-    constructor(value: string) {
+    constructor(label: string, value: string) {
+        this.label = label;
         this.value = value;
     }
 
-    static get and() {
-        return new Condition('and');
-    }
-    static get or() {
-        return new Condition('or')
-    };
 }

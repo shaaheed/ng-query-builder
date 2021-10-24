@@ -1,3 +1,8 @@
+<!--
+    Copyright (c) Sahidul Islam. All Rights Reserved.
+    Author: https://github.com/shaaheed
+-->
+
 <nz-select [(ngModel)]="value" [nzLoading]="loading" nzShowSearch (ngModelChange)="onValueChange($event)" nzAllowClear
     [nzPlaceHolder]="placeholder" [nzDisabled]="disabled">
     <nz-option *ngFor="let p of items" [nzLabel]="p.name" [nzValue]="p.value">

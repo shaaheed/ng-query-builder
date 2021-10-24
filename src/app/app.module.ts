@@ -1,3 +1,6 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { QueryBuilderModule } from 'projects/ng-query-builder/src/public-api';
@@ -9,8 +12,15 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 
 registerLocaleData(en);
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+}
 
 @NgModule({
   declarations: [
@@ -21,9 +31,18 @@ registerLocaleData(en);
     QueryBuilderModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    NzToolTipModule,
+    NzIconModule,
+    BrowserAnimationsModule,
+    PerfectScrollbarModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

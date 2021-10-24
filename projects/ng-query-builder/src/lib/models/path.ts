@@ -1,3 +1,6 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { Group } from "./group";
 import { Rule } from "./rule";
 

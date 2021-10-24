@@ -1,6 +1,9 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Field } from '../models/field';
-import { FieldType } from '../models/field-type';
+import { Field } from '../models/fields/field';
+import { FieldType } from '../models/fields/field-type';
 import { Filter } from '../models/filter';
 import { Rule } from '../models/rule';
 import { QueryBuilderService } from './builder.service';
@@ -32,47 +35,6 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.addFields([
-      new Field('Age', 'age', FieldType.number),
-      new Field('Name', 'name', FieldType.text),
-      new Field('Email', 'email', FieldType.text),
-      new Field('Phone', 'phone', FieldType.text),
-      new Field('Birthday', 'birthday', FieldType.date)
-    ]);
-
-    // default items
-    const age = new Rule(this.service.getFields()[0], gt, '20');
-    this.service.addRule(age);
-
-    const name = new Rule(this.service.getFields()[1], contains, 'abc');
-    this.service.addRule(name);
-
-    const g1 = new Group();
-    const email = new Rule(this.service.getFields()[2], eq, 'xyz');
-    g1.rules.push(email);
-
-    const birthday = new Rule(this.service.getFields()[4], ge, '15/09/1990');
-    g1.rules.push(birthday);
-
-    const name2 = name.clone();
-    name2.value = 'name2';
-    g1.rules.push(name2);
-
-    const g2 = new Group();
-    const name3 = name.clone();
-    name3.value = 'name3';
-    g2.rules.push(name3);
-    g1.rules.push(g2);
-
-    const g3 = new Group();
-    const name4 = name.clone();
-    name4.value = 'name4';
-    g3.rules.push(name4);
-    g2.rules.push(g3);
-
-    this.service.addRule(g1);
-
-    this.service.addRule(new Rule(this.service.getFields()[3], notStartsWith, '017'));
     this.rules = this.service.getRules();
   }
 

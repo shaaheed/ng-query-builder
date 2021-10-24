@@ -1,17 +1,25 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { Injectable } from '@angular/core';
-import { Field } from '../models/field';
+import { Field } from '../models/fields/field';
 import { Group } from '../models/group';
 import { Operator } from '../models/operator';
-import { OperatorProvider } from '../models/operator-provider';
+import { OperatorProvider } from '../operator-provider';
 import { Rule } from '../models/rule';
 import { Filter } from '../models/filter';
 import { Type } from '../models/type';
 import { Path } from '../models/path';
+import { Subject } from 'rxjs';
+import { SqlConverter } from '../converter/sql.converter';
+import { Converter } from '../converter/converter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QueryBuilderService {
+
+  onUpdate: Subject<any> = new Subject();
 
   private rules: (Group | Rule)[] = [];
   private fields: Field[] = [];
@@ -88,6 +96,8 @@ export class QueryBuilderService {
     if (this.rules?.length == 1 && this.isGroup(this.rules[0])) {
       this.rules = (this.rules.splice(0, 1)[0] as Group).rules;
     }
+
+    this.onUpdateInternal();
   }
 
   deleteGroup(id: string) {
@@ -106,6 +116,7 @@ export class QueryBuilderService {
     if (this.rules?.length == 1 && this.isGroup(this.rules[0])) {
       this.rules = (this.rules.splice(0, 1)[0] as Group).rules;
     }
+    this.onUpdateInternal();
   }
 
   addRuleById(rule: Rule | Group, id?: string): void {
@@ -131,6 +142,7 @@ export class QueryBuilderService {
         }
       }
     }
+    this.onUpdateInternal();
   }
 
   findPaths(
@@ -164,6 +176,18 @@ export class QueryBuilderService {
 
   isRule(rule: Rule | Group): boolean {
     return this.getType(rule) == Type.rule;
+  }
+
+  toSql(): string {
+    return this.convert(new SqlConverter());
+  }
+
+  convert<T>(converter: Converter<T>): T {
+    return converter.convert(this.rules);
+  }
+
+  private onUpdateInternal() {
+    this.onUpdate.next();
   }
 
 }

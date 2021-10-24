@@ -1,3 +1,6 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 export class Operator {
     name: string;
     value: string;
@@ -24,4 +27,3 @@ export const endsWith: Operator = new Operator('ends with', 'endsWith', 'ends wi
 export const notEndsWith: Operator = new Operator('not ends with', 'notEndsWith', 'not ends with');
 export const between: Operator = new Operator('between', 'between', 'between');
 export const notBetween: Operator = new Operator('not between', 'notBetween', 'not between');
-

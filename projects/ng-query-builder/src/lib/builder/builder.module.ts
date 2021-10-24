@@ -1,3 +1,6 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';

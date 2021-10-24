@@ -1,6 +1,9 @@
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { QueryBuilderService } from '../builder/builder.service';
-import { Field } from '../models/field';
+import { Field } from '../models/fields/field';
 import { Filter } from '../models/filter';
 import { Operator } from '../models/operator';
 

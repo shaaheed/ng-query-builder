@@ -1,5 +1,8 @@
-import { FieldType } from "./field-type";
-import { between, contains, endsWith, eq, ge, gt, le, lt, ne, notBetween, notContains, notEndsWith, notStartsWith, Operator, startsWith } from "./operator";
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
+import { FieldType } from "./models/fields/field-type";
+import { between, contains, endsWith, eq, ge, gt, le, lt, ne, notBetween, notContains, notEndsWith, notStartsWith, Operator, startsWith } from "./models/operator";
 
 export class OperatorProvider {
     get(fieldType: FieldType): Operator[] {

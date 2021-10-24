@@ -1,4 +1,7 @@
-import { Field } from "./field";
+// Copyright (c) Sahidul Islam. All Rights Reserved.
+// Author: https://github.com/shaaheed
+
+import { Field } from "./fields/field";
 import { Operator } from "./operator";
 
 export class Filter {
