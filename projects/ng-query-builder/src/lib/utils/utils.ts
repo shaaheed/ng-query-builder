@@ -8,3 +8,7 @@ export const uuid = () => {
 export const clone = <T>(obj: T): T => {
     return <T>JSON.parse(JSON.stringify(obj))
 }
+
+export const isString = (value: any): boolean => {
+    return value.constructor.name == 'String';
+}

@@ -39,7 +39,7 @@ export class FilterComponent {
       this.filter = new Filter(this.builderService.getFields());
     }
     this.fields = this.filter.fields.map(x => {
-      return { name: x.name, value: x.value }
+      return { label: x.name, value: x.value }
     });
 
     if (field) {
@@ -69,8 +69,8 @@ export class FilterComponent {
         this.filter.field = field;
         this.filter.operators = this.builderService.getOperators(field);
         this.operators = this.filter.operators.map(x => {
-          return { name: x.name, value: x.value }
-        })
+          return { label: x.name, value: x.value }
+        });
       }
     }
   }
@@ -100,6 +100,5 @@ export class FilterComponent {
 
   handleCancel() {
     this.show = false;
-    // this.showChange.emit(false);
   }
 }

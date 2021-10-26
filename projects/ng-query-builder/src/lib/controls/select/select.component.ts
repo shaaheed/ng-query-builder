@@ -2,6 +2,7 @@
 // Author: https://github.com/shaaheed
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { isString } from '../../utils/utils';
 
 @Component({
   selector: 'app-select',
@@ -9,17 +10,32 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SelectComponent {
 
-  @Input() value: any;
+  @Input() set value(v: any) {
+    if (this.mode == 'multiple' && isString(v)) {
+      this._value = [v];
+    }
+    else {
+      this._value = v;
+    }
+  };
+
+  get value(): any | any[] {
+    return this._value;
+  }
+
   @Input() loading: boolean = false;
   @Input() placeholder: string = 'Select';
   @Input() disabled = false;
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
-  @Input() items: any[] = [];
+  @Input() options: any[] = [];
+  @Input() mode: any = 'default';
+
+  private _value: any;
 
   ngOnInit() { }
 
   onValueChange(e: any) {
     this.onChange.emit(e);
-    console.log(e);
+    this._value = e;
   }
 }

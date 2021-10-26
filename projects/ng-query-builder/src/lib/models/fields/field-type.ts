@@ -7,5 +7,6 @@ export enum FieldType {
     number = 'number',
     date = 'date',
     boolean = 'boolean',
-    multiSelect = 'multi_select'
+    multiSelect = 'multi_select',
+    select = 'select'
 }

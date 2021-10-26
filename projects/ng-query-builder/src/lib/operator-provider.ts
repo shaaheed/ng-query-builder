@@ -9,11 +9,14 @@ export class OperatorProvider {
         if (fieldType == FieldType.text) {
             return [eq, ne, contains, notContains, startsWith, notStartsWith, endsWith, notEndsWith]
         }
-        else if (fieldType == 'number') {
+        else if (fieldType == FieldType.number) {
             return [eq, ne, gt, lt, ge, le];
         }
-        else if (fieldType == 'date') {
+        else if (fieldType == FieldType.date) {
             return [eq, ne, gt, lt, ge, le, between, notBetween];
+        }
+        else if (fieldType == FieldType.multiSelect) {
+            return [eq, ne];
         }
         return [];
     }

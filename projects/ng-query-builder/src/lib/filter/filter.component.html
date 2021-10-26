@@ -7,23 +7,38 @@
     nzTitle="Add a filter" [nzBodyStyle]="bodyStyle" nzMask="false">
     <ng-template #modalContent>
         <div class="filter-body">
-            <!-- {{filter?.field?.type}} -->
+            {{filter?.field?.type}}
             <div class="controls">
 
                 <!-- field -->
-                <app-select [value]="filter?.field?.value" (onChange)="onFieldChange($event)" [items]="fields"
+                <app-select [value]="filter?.field?.value" (onChange)="onFieldChange($event)" [options]="fields"
                     placeholder="Field"></app-select>
 
                 <!-- operator -->
                 <app-select [value]="filter?.operator?.value" [disabled]="filter?.field == null"
-                    (onChange)="onOperatorChange($event)" [items]="operators" placeholder="Operator"></app-select>
+                    (onChange)="onOperatorChange($event)" [options]="operators" placeholder="Operator"></app-select>
 
                 <!-- date -->
-                <app-date-picker [value]="filter?.value" *ngIf="filter?.field?.type == 'date'" (onChange)="onValueChange($event)"></app-date-picker>
+                <app-date-picker [value]="filter?.value" *ngIf="filter?.field?.type == 'date'"
+                    (onChange)="onValueChange($event)"></app-date-picker>
+
+                <!-- multi select -->
+                <app-select *ngIf="filter?.field?.type == 'multi_select'" mode="multiple"
+                    [disabled]="filter?.field == null" (onChange)="onValueChange($event)"
+                    [options]="$any(filter?.field)?.options" [value]="filter?.value" placeholder="Select options">
+                </app-select>
+
+                <!-- select -->
+                <app-select *ngIf="filter?.field?.type == 'select'"
+                    [disabled]="filter?.field == null" (onChange)="onValueChange($event)"
+                    [options]="$any(filter?.field)?.options" [value]="filter?.value" placeholder="Select option">
+                </app-select>
 
                 <!-- text -->
-                <app-input *ngIf="filter?.field?.type != 'date'" [value]="filter?.value" [type]="filter?.field?.type"
-                    [disabled]="filter?.operator == null" (onChange)="onValueChange($event)"></app-input>
+                <app-input *ngIf="['text', 'string', 'number'].indexOf($any(filter?.field?.type)) != -1"
+                    [value]="filter?.value" [type]="filter?.field?.type" [disabled]="filter?.operator == null"
+                    (onChange)="onValueChange($event)"></app-input>
+
             </div>
             <div class="buttons">
                 <button (click)="handleCancel()" nz-button>Cancel</button>
