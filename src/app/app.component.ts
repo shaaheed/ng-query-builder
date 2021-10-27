@@ -1,16 +1,18 @@
 // Copyright (c) Sahidul Islam. All Rights Reserved.
 // Author: https://github.com/shaaheed
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Condition } from 'projects/ng-query-builder/src/lib/models/condition';
 import { Field } from 'projects/ng-query-builder/src/lib/models/fields/field';
 import { FieldType } from 'projects/ng-query-builder/src/lib/models/fields/field-type';
 import { MultiSelectField } from 'projects/ng-query-builder/src/lib/models/fields/multi-select-field';
+import { SelectField } from 'projects/ng-query-builder/src/lib/models/fields/select-field';
 import { Group } from 'projects/ng-query-builder/src/lib/models/group';
-import { contains, endsWith, eq, ge, gt, le, ne, notStartsWith } from 'projects/ng-query-builder/src/lib/models/operator';
+import { contains, endsWith, eq, ge, le, notStartsWith } from 'projects/ng-query-builder/src/lib/models/operator';
 import { Option } from 'projects/ng-query-builder/src/lib/models/option';
 import { Rule } from 'projects/ng-query-builder/src/lib/models/rule';
 import { QueryBuilderService } from 'projects/ng-query-builder/src/public-api';
+import { OutputComponent } from './output/output.component';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +22,9 @@ import { QueryBuilderService } from 'projects/ng-query-builder/src/public-api';
 export class AppComponent {
 
   sql: string = '';
+  @ViewChild('outputModal') outputModal: OutputComponent | undefined;
 
-  constructor(private queryBuilder: QueryBuilderService) {
-
-  }
+  constructor(private queryBuilder: QueryBuilderService) { }
 
   ngOnInit() {
     const countryField = new MultiSelectField('Country', 'country',
@@ -32,7 +33,7 @@ export class AppComponent {
         new Option('Others', 'others')
       ]
     );
-    const genderField = new MultiSelectField('Gender', 'gender',
+    const genderField = new SelectField('Gender', 'gender',
       [
         new Option('Male', 'male'),
         new Option('Female', 'female'),
@@ -45,6 +46,7 @@ export class AppComponent {
     const phoneField = new Field('Phone', 'phone', FieldType.text);
     const birthdayField = new Field('Birthday', 'birthday', FieldType.date);
     const addressField = new Field('Address', 'address', FieldType.text);
+    const activeField = new Field('Active', 'active', FieldType.boolean);
     this.queryBuilder.addFields([
       ageField,
       nameField,
@@ -53,7 +55,8 @@ export class AppComponent {
       birthdayField,
       addressField,
       countryField,
-      genderField
+      genderField,
+      activeField
     ]);
 
     this.queryBuilder.onUpdate.subscribe(() => {
@@ -64,11 +67,14 @@ export class AppComponent {
     const nameRule = new Rule(nameField, contains, 'Islam');
     this.queryBuilder.addRule(nameRule);
 
+    const activeRule = new Rule(activeField, eq, 'true');
+    this.queryBuilder.addRule(activeRule);
+
     const g = new Group();
     const countryRule = new Rule(countryField, eq, 'bd');
     g.addRule(countryRule);
 
-    const genderRule = new Rule(genderField, ne, 'male');
+    const genderRule = new Rule(genderField, eq, 'male');
     g.addRule(genderRule);
 
     const g1 = new Group();
@@ -94,6 +100,17 @@ export class AppComponent {
     this.queryBuilder.addRule(addressRule);
 
     this.sql = this.queryBuilder.toSql();
+  }
+
+  output(type: string) {
+    let output: any;
+    if (type == 'sql') {
+      output = this.queryBuilder.toSql();
+    }
+    else if (type == 'json') {
+      output = this.queryBuilder.toJson();
+    }
+    this.outputModal?.open(output, type);
   }
 
 }

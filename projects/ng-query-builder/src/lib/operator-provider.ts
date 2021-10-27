@@ -15,7 +15,10 @@ export class OperatorProvider {
         else if (fieldType == FieldType.date) {
             return [eq, ne, gt, lt, ge, le, between, notBetween];
         }
-        else if (fieldType == FieldType.multiSelect) {
+        else if ([FieldType.multiSelect, FieldType.select].indexOf(fieldType) != -1) {
+            return [eq, ne];
+        }
+        else if (fieldType == FieldType.boolean) {
             return [eq, ne];
         }
         return [];

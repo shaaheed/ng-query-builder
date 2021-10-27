@@ -3,12 +3,11 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Field } from '../models/fields/field';
-import { FieldType } from '../models/fields/field-type';
 import { Filter } from '../models/filter';
 import { Rule } from '../models/rule';
 import { QueryBuilderService } from './builder.service';
 import { FilterComponent } from '../filter/filter.component';
-import { contains, eq, ge, gt, notStartsWith, Operator } from '../models/operator';
+import { Operator } from '../models/operator';
 import { Condition } from '../models/condition';
 import { NzPopoverDirective } from 'ng-zorro-antd/popover';
 import { Group } from '../models/group';

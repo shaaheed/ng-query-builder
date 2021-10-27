@@ -8,6 +8,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { DatePickerModule } from '../controls/date-picker/date-picker.module';
 import { InputModule } from '../controls/input/input.module';
 import { SelectModule } from '../controls/select/select.module';
+import { SwitchModule } from '../controls/switch/switch.module';
 import { FilterComponent } from './filter.component';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FilterComponent } from './filter.component';
     SelectModule,
     InputModule,
     DatePickerModule,
-    NzButtonModule
+    NzButtonModule,
+    SwitchModule
   ],
   exports: [
     FilterComponent

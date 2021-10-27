@@ -8,10 +8,10 @@ import { Converter } from "./converter";
 export class SqlConverter implements Converter<string> {
 
     convert(rules: (Rule | Group)[]): string {
-        return this.convertSql(rules);
+        return this.convertToSql(rules);
     }
 
-    convertSql(rules: (Rule | Group)[], sql: string = ''): string {
+    convertToSql(rules: (Rule | Group)[], sql: string = ''): string {
         for (let i = 0; i < rules.length; i++) {
             const rule = rules[i];
             if (i != 0) {
@@ -21,7 +21,7 @@ export class SqlConverter implements Converter<string> {
                 sql += ` ${rule.field.value} ${rule.operator.value} ${rule.value}`;
             }
             else if (rule instanceof Group) {
-                sql += ` (${this.convertSql(rule.rules)})`;
+                sql += ` (${this.convertToSql(rule.rules)})`;
             }
         }
         return sql;

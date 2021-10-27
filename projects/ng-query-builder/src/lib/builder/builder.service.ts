@@ -13,6 +13,7 @@ import { Path } from '../models/path';
 import { Subject } from 'rxjs';
 import { SqlConverter } from '../converter/sql.converter';
 import { Converter } from '../converter/converter';
+import { JsonConverter } from '../converter/json.converter';
 
 @Injectable({
   providedIn: 'root'
@@ -180,6 +181,10 @@ export class QueryBuilderService {
 
   toSql(): string {
     return this.convert(new SqlConverter());
+  }
+
+  toJson(): string {
+    return this.convert(new JsonConverter());
   }
 
   convert<T>(converter: Converter<T>): T {

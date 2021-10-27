@@ -29,15 +29,20 @@
                 </app-select>
 
                 <!-- select -->
-                <app-select *ngIf="filter?.field?.type == 'select'"
-                    [disabled]="filter?.field == null" (onChange)="onValueChange($event)"
-                    [options]="$any(filter?.field)?.options" [value]="filter?.value" placeholder="Select option">
+                <app-select *ngIf="filter?.field?.type == 'select'" [disabled]="filter?.field == null"
+                    (onChange)="onValueChange($event)" [options]="$any(filter?.field)?.options" [value]="filter?.value"
+                    placeholder="Select option">
                 </app-select>
 
                 <!-- text -->
                 <app-input *ngIf="['text', 'string', 'number'].indexOf($any(filter?.field?.type)) != -1"
                     [value]="filter?.value" [type]="filter?.field?.type" [disabled]="filter?.operator == null"
                     (onChange)="onValueChange($event)"></app-input>
+
+                <!-- switch -->
+                <app-switch *ngIf="filter?.field?.type == 'boolean'"
+                [value]="filter?.value" [disabled]="filter?.operator == null"
+                (onChange)="onValueChange($event)"></app-switch>
 
             </div>
             <div class="buttons">

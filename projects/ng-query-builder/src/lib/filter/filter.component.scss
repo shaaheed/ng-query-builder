@@ -4,11 +4,12 @@
 }
 .controls {
     display: flex;
+    align-items: center;
+    padding-bottom: 20px;
     app-select {
         flex: 1;
         margin-right: 5px;
     }
-    padding-bottom: 20px;
 }
 
 .buttons {

@@ -85,7 +85,7 @@ export class FilterComponent {
   }
 
   onValueChange(e: any) {
-    if (e && this.filter) {
+    if (this.filter) {
       if (e instanceof Date) {
         e = `${e.getDate()}/${e.getMonth() + 1}/${e.getFullYear()}`;
       }
