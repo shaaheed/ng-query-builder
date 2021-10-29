@@ -11,9 +11,10 @@ import { Filter } from '../models/filter';
 import { Type } from '../models/type';
 import { Path } from '../models/path';
 import { Subject } from 'rxjs';
-import { SqlConverter } from '../converter/sql.converter';
+import { QueryConverter } from '../converter/query.converter';
 import { Converter } from '../converter/converter';
 import { JsonConverter } from '../converter/json.converter';
+import { QueryHtmlConverter } from '../converter/query-html.converter';
 
 @Injectable({
   providedIn: 'root'
@@ -179,11 +180,15 @@ export class QueryBuilderService {
     return this.getType(rule) == Type.rule;
   }
 
-  toSql(): string {
-    return this.convert(new SqlConverter());
+  toQueryString(): string {
+    return this.convert(new QueryConverter());
   }
 
-  toJson(): string {
+  toQueryStringHtml(): string {
+    return this.convert(new QueryHtmlConverter());
+  }
+
+  toJsonString(): string {
     return this.convert(new JsonConverter());
   }
 

@@ -5,13 +5,13 @@ import { Group } from "../models/group";
 import { Rule } from "../models/rule";
 import { Converter } from "./converter";
 
-export class SqlConverter implements Converter<string> {
+export class QueryConverter implements Converter<string> {
 
     convert(rules: (Rule | Group)[]): string {
-        return this.convertToSql(rules);
+        return this.convertToQuery(rules);
     }
 
-    convertToSql(rules: (Rule | Group)[], sql: string = ''): string {
+    convertToQuery(rules: (Rule | Group)[], sql: string = ''): string {
         for (let i = 0; i < rules.length; i++) {
             const rule = rules[i];
             if (i != 0) {
@@ -21,7 +21,7 @@ export class SqlConverter implements Converter<string> {
                 sql += ` ${rule.field.value} ${rule.operator.value} ${rule.value}`;
             }
             else if (rule instanceof Group) {
-                sql += ` (${this.convertToSql(rule.rules)})`;
+                sql += ` (${this.convertToQuery(rule.rules)})`;
             }
         }
         return sql;

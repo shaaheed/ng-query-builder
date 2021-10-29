@@ -4,10 +4,10 @@
 -->
 
 <nz-modal nzCentered [(nzVisible)]="show" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="handleCancel()"
-    nzTitle="Add a filter" [nzBodyStyle]="bodyStyle" nzMask="false">
+    nzTitle="{{ mode == 'edit' ? 'Edit' : 'Add'}} a Rule" [nzBodyStyle]="bodyStyle" nzMask="false">
     <ng-template #modalContent>
         <div class="filter-body">
-            {{filter?.field?.type}}
+            <!-- {{filter?.field?.type}} -->
             <div class="controls">
 
                 <!-- field -->

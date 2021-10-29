@@ -46,3 +46,23 @@ button {
 nz-option-container {
     border-radius: 10px !important;
 }
+
+.output {
+    .ant-modal-title {
+        text-transform: capitalize;
+    }
+    .query {
+        .value {
+            color: #567a0d;
+        }
+        .condition {
+            color: #015493
+        }
+        .operator {
+            color: #b75301
+        }
+    }
+    span.key {
+        color: #116329;
+    }
+}

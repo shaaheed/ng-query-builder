@@ -8,7 +8,8 @@ import { Converter } from "./converter";
 export class JsonConverter implements Converter<string> {
 
     convert(rules: (Rule | Group)[]): string {
-        return JSON.stringify(this.convertToJson(rules), undefined, 2);
+        const json = JSON.stringify(this.convertToJson(rules), undefined, 2);
+        return json;
     }
 
     convertToJson(rules: any[]) {
@@ -19,16 +20,17 @@ export class JsonConverter implements Converter<string> {
 
             delete rule.id;
             delete rule._type;
-
-            rule.type = type;
+            delete rule.type;
+            
             if (type == 'rule') {
-                delete rule.field.disable;
+                rule.field = rule.field.value;
+                rule.operator = rule.operator.value;
             }
             else if (type == 'group') {
-                this.convertToJson(rule.rules);
+                rule.rules = this.convertToJson(rule.rules);
             }
+            rule.condition = rule.condition.value;
         }
         return json;
     }
-
 }

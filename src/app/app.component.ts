@@ -11,6 +11,7 @@ import { Group } from 'projects/ng-query-builder/src/lib/models/group';
 import { contains, endsWith, eq, ge, le, notStartsWith } from 'projects/ng-query-builder/src/lib/models/operator';
 import { Option } from 'projects/ng-query-builder/src/lib/models/option';
 import { Rule } from 'projects/ng-query-builder/src/lib/models/rule';
+import { jsonSyntaxHighlight } from 'projects/ng-query-builder/src/lib/utils/utils';
 import { QueryBuilderService } from 'projects/ng-query-builder/src/public-api';
 import { OutputComponent } from './output/output.component';
 
@@ -21,7 +22,6 @@ import { OutputComponent } from './output/output.component';
 })
 export class AppComponent {
 
-  sql: string = '';
   @ViewChild('outputModal') outputModal: OutputComponent | undefined;
 
   constructor(private queryBuilder: QueryBuilderService) { }
@@ -59,10 +59,6 @@ export class AppComponent {
       activeField
     ]);
 
-    this.queryBuilder.onUpdate.subscribe(() => {
-      this.sql = this.queryBuilder.toSql();
-    });
-
     // default items
     const nameRule = new Rule(nameField, contains, 'Islam');
     this.queryBuilder.addRule(nameRule);
@@ -98,17 +94,15 @@ export class AppComponent {
 
     const addressRule = new Rule(addressField, eq, 'Tangail')
     this.queryBuilder.addRule(addressRule);
-
-    this.sql = this.queryBuilder.toSql();
   }
 
   output(type: string) {
     let output: any;
-    if (type == 'sql') {
-      output = this.queryBuilder.toSql();
+    if (type == 'query') {
+      output = this.queryBuilder.toQueryStringHtml();
     }
     else if (type == 'json') {
-      output = this.queryBuilder.toJson();
+      output = jsonSyntaxHighlight(this.queryBuilder.toJsonString());
     }
     this.outputModal?.open(output, type);
   }

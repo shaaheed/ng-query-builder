@@ -5,7 +5,7 @@
 
 <ng-container *ngFor="let rule of rules; let i = index;">
     <ng-container [ngTemplateOutlet]="ruleTemplate"
-        [ngTemplateOutletContext]="{ rule: rule, next: i < rules.length ? rules[i+1] : null, index: i, length: rules.length, grandIndex: i, grandLength: rules.length, depth: 0 }">
+        [ngTemplateOutletContext]="{ rule: rule, next: i < rules.length ? rules[i+1] : null, index: i, length: rules.length, grandIndex: i, grandLength: rules.length}">
     </ng-container>
 </ng-container>
 
@@ -22,21 +22,21 @@
 
 <!-- rule template -->
 <ng-template #ruleTemplate let-rule="rule" let-next="next" let-i="index" let-length="length" let-grandIndex="grandIndex"
-    let-grandLength="grandLength" let-depth="depth">
+    let-grandLength="grandLength">
 
     <!-- group -->
     <ng-container *ngIf="rule.rules && rule.rules.length > 0">
         <div class="group">
             <ng-container *ngFor="let rule2 of rule.rules; let i2 = index">
                 <ng-container [ngTemplateOutlet]="ruleTemplate"
-                    [ngTemplateOutletContext]="{ rule: rule2, next: i2 < rule.rules.length ? rule.rules[i2+1] : null, index: i2, length: rule.rules.length, grandIndex: grandIndex, grandLength: grandLength, depth: depth + 1 }">
+                    [ngTemplateOutletContext]="{ rule: rule2, next: i2 < rule.rules.length ? rule.rules[i2+1] : null, index: i2, length: rule.rules.length, grandIndex: grandIndex, grandLength: grandLength}">
                 </ng-container>
             </ng-container>
         </div>
 
         <!-- condition -->
         <ng-container [ngTemplateOutlet]="conditionTemplate"
-            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length, depth: depth }">
+            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length}">
         </ng-container>
 
     </ng-container>
@@ -87,7 +87,7 @@
 
         <!-- condition -->
         <ng-container [ngTemplateOutlet]="conditionTemplate"
-            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length, depth: depth }">
+            [ngTemplateOutletContext]="{ rule: rule, next: next, condition: rule.condition, last: (i+1) >= length}">
         </ng-container>
 
     </ng-container>
@@ -95,8 +95,7 @@
 </ng-template>
 
 <!-- condition template -->
-<ng-template #conditionTemplate let-rule="rule" let-next="next" let-condition="condition" let-last="last"
-    let-depth="depth">
+<ng-template #conditionTemplate let-rule="rule" let-next="next" let-condition="condition" let-last="last">
     <div class="condition" *ngIf="!last">
         <ng-container *ngIf="condition?.value == 'and'">
             <nz-tag (click)="toggleCondition(condition)" [nzColor]="'#fdbf4c'">{{condition.value}}</nz-tag>
