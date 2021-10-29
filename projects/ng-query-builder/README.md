@@ -1,24 +1,9 @@
-# NgQueryBuilder
+# Ng Query Builder
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+A beautiful query builder for Angular application.
 
-## Code scaffolding
+👉 It can be used for advanced search engines, filter etc.<br />
+👉 It is highly customizable and pluggable.<br />
+👉 It outputs a SQL style query string, structured JSON of rules which can be easily parsed to create SQL/NoSQL/whatever queries.<br />
 
-Run `ng generate component component-name --project ng-query-builder` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-query-builder`.
-> Note: Don't forget to add `--project ng-query-builder` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build ng-query-builder` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ng-query-builder`, go to the dist folder `cd dist/ng-query-builder` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ng-query-builder` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Demo: <a href="https://shaaheed.github.io/ng-query-builder/" target="_blank">https://shaaheed.github.io/ng-query-builder/</a>
